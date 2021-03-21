@@ -292,16 +292,18 @@ def get_position_from_rank(rank, multiplier):
     """ Compute the position using the rank and the multiplier
      and offset by some random value """
 
-    position = (multiplier * rank) + random.randint(0, multiplier - 1)
+    position = (multiplier * rank) + random.randint(0, multiplier)
     
     return position
-    
     # If you want to start the ranking from 2000 
     # return (position + 2000)
 
-def get_positions_for_all(ranks, multiplier):
+def get_positions_for_all(ranks, multiplier, seed):
+    """ Compute positions for all ranks """
+    random.seed(seed)
     positions = [(ranks[i][0], get_position_from_rank(ranks[i][1], multiplier)) 
     for i in range (len(ranks))]
+    
     return positions
 
 def increment_referral_count(id):

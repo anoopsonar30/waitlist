@@ -11,8 +11,13 @@
 # on the waitlist can go higher after registration in some cases if too many other people
 # give out successful referrals. This is a theoretical limitation unless you decide to 
 # give them the same position as someone else.
-# 4) It took ~80 seconds to add 10,000 users (numRandUsers = 10000) on my computer so the server
-# should be able to handle 10,000 users over the course of a day.
+# 4) It took ~80 seconds to add 10,000 users (numRandUsers = 10000) on my computer
+# so the server should be able to handle 10,000 users over the course of a day.
+# 5) The code for generating referral links and checking which account referred which new 
+# registration would be a separate feature that would be build on top of this API. 
+# I've provided the end point to increment the referral count for a particular user.
+# 6) You can change the value of the multiplier (5 by default) to control how spread out 
+# the positions are.
 
 from utils import *
 import time
@@ -59,17 +64,20 @@ if __name__ == '__main__':
     # Fix the seed for consistent positioning
     random.seed(seed)
     multiplier = 5
-    positions = get_positions_for_all(ranks, multiplier)
+    positions = get_positions_for_all(ranks, multiplier, seed)
     print("Positions : ", positions)
 
-    # Access the rank of a particular id on the waitlist.
+    # Access the rank of a particular id on the waitlist sorted by # of referrals
+    # I think this is reasonable because in practice, very few people give out 
+    # succesful referrals. 
     # Initially the rank was (numRandUsers + 1) but 
-    # after adding the referral it becomes 1 
+    # after adding the referral it becomes 1 since everyone else 
+    # has 0 referrals.
     rank = get_rank(id)[0]
     print("Rank for id ", id, " : ", rank)
 
-    # Print the position corresponding to a particular rank 
-    position = get_position_from_rank(rank, multiplier)
+    # Print the position corresponding to a particular rank
+    position = positions[rank - 1][1]
     print("Position : ", position)
 
     # # Remove row corresponding to id from waitlist
