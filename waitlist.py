@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # Print the positions for all ID's on the waitlist
     seed = 4
-    # Fix the seed for consistent ranking
+    # Fix the seed for consistent positioning
     random.seed(seed)
     multiplier = 5
     positions = get_positions_for_all(ranks, multiplier)
