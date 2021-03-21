@@ -76,7 +76,7 @@ if __name__ == '__main__':
     rank = get_rank(id)[0]
     print("Rank for id ", id, " : ", rank)
 
-    # Print the position corresponding to a particular rank
+    # Print the position corresponding to a particular id
     position = positions[rank - 1][1]
     print("Position : ", position)
 
