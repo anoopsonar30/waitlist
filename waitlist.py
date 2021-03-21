@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     # Access the rank of a particular id on the waitlist sorted by # of referrals
     # I think this is reasonable because in practice, very few people give out 
-    # succesful referrals. 
+    # succesful referrals compared to the total number of users
     # Initially the rank was (numRandUsers + 1) but 
     # after adding the referral it becomes 1 since everyone else 
     # has 0 referrals.
